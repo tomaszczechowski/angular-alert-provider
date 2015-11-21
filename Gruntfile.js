@@ -11,7 +11,7 @@ module.exports = function(grunt) {
      * Copy files to specify folders depending on environment.
      */
     copy: {
-      vendorFiles: {
+      vendorFilesToExamples: {
         files: [{
           expand: true,
           src: [
@@ -26,7 +26,7 @@ module.exports = function(grunt) {
           dest: 'examples/'
         }]
       },
-      alertProvider: {
+      srcToExamples: {
         files: [{
           expand: true,
           src: [
@@ -34,6 +34,10 @@ module.exports = function(grunt) {
           ],
           dest: 'examples/vendor/angular-alert-provider/'
         }]
+      },
+      srcToDist: {
+        src: 'src/alertProvider.js',
+        dest: 'dist/alertProvider.js'
       }
     },
 
@@ -51,12 +55,36 @@ module.exports = function(grunt) {
       }
     },
 
+    uglify: {
+      dist: {
+        options: {
+          sourceMap: true,
+          sourceMapName: 'dist/alertProvider.map',
+          compress: {
+            drop_console: true
+          },
+          preserveComments: 'all'
+        },
+        files: {
+          'dist/alertProvider.min.js': ['src/alertProvider.js']
+        }
+      }
+    },
+
     serve: {
-      examples: ['copy','connect:examples']
+      examples: ['copy:vendorFilesToExamples','copy:srcToExamples', 'connect:examples']
+    },
+
+    build: {
+      build: ['uglify:dist', 'copy:srcToDist']
     }
   };
 
   grunt.registerMultiTask('serve', 'Run application of specify environment.', function () {
+    grunt.task.run(this.data);
+  });
+
+  grunt.registerMultiTask('build', 'Building application', function () {
     grunt.task.run(this.data);
   });
 
