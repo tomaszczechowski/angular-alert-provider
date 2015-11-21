@@ -1,3 +1,11 @@
+ /**
+  * @author Tomasz Czechowski
+  * @version 0.1.0
+  * @name AlertProvider
+  * @license MIT
+  * @description Module shows modal window based on boostrap modal provider.
+  */
+
  (function () {
   "use strict";
 
@@ -44,13 +52,14 @@
           alertOptions = angular.extend({}, $alertProvider.options, alertOptions);
           alertOptions.resolve = alertOptions.resolve || {};
 
-          //verify options
-          if (!alertOptions.body) {
-            throw new Error('Parameter "body" is required.');
-          }
+          var requiredParams = ['title', 'body', 'buttons'];
 
-          if (!alertOptions.buttons) {
-            throw new Error('Parameter "buttons" is required.');
+          for (var i = 0; i < requiredParams.length; i++) {
+            var param = requiredParams[i];
+
+            if (!alertOptions.hasOwnProperty(param)) {
+              throw new Error('Parameter "' + param + '" is required.');
+            }
           }
 
           alertOptions.resolve.options = function () {
