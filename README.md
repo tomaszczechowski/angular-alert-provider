@@ -56,7 +56,7 @@ angular.module('App', ['$alertProvider']);
 
 Result:
 
-![alt tag](https://raw.github.com/tomaszczechowski/angular-alert-provider/master/alertProviderg.png)
+![alt tag](https://raw.github.com/tomaszczechowski/angular-alert-provider/master/alertProvider.png)
 
 ### Example
 
