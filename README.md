@@ -84,6 +84,9 @@ Body of modal dialog.
 
 + **buttons (required):**
 Collection of buttons:
+    * **label**: - button label.
+    * **cssClass**: - css class of button.
+    * **action**: - callback triggered once clicked on button.
 
 ```javascript
 buttons: [
@@ -99,9 +102,8 @@ buttons: [
   }
 ]
 ```
-*label: - button label.
-*cssClass: - css class of button.
-*action: - callback triggered once clicked on button.
++ **templateUrl (optional):**
+Provider allows to change tempalate. Here you can set different template url in order to change structure of modal.
 
 ### Release notes
 - 0.1.0 First version.
