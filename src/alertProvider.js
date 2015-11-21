@@ -3,37 +3,26 @@
 
   var app = angular.module('AlertProvider', ['ui.bootstrap.modal']);
 
-  app.controller('AlertProviderController', ['$uibModalInstance', 'options', function ($uibModalInstance, options) {
-    var vm = this;
+  app.controller('AlertProviderController', ['$scope', '$uibModalInstance', 'options', function ($scope, $uibModalInstance, options) {
 
-    vm.text = options.text;
+    $scope.options = options;
 
-    vm.yes = function () {
-      $uibModalInstance.close('yes');
+    $scope.buttonClicked = function (button) {
+      $uibModalInstance.close(button);
     };
-
-    vm.no = function () {
-      $uibModalInstance.close('no');
-    };
-
   }]);
 
-	app.provider('$alertProvider', function () {
-
-    var $confirmAlertProvider = {
+  app.provider('$alertProvider', function () {
+    var $alertProvider = {
       options: {
-        backdrop: true, //can be also false or 'static'
-        keyboard: true,
         templateUrl: 'alertProvider.html',
-        controller: 'AlertProviderController as confirmAlertVM',
-        backdropClass: 'backdrop',
-        windowClass: 'modal-window'
+        controller: 'AlertProviderController'
       },
       $get: ['$q', '$uibModal', function ($q, $uibModal) {
 
         var $alert = {};
 
-				$alert.open = function (alertOptions) {
+        $alert.open = function (alertOptions) {
 
           var alertOpenedDeferred = $q.defer();
           var alertResultDeferred = $q.defer();
@@ -52,43 +41,49 @@
           };
 
           //merge and clean up options
-          alertOptions = angular.extend({}, $confirmAlertProvider.options, alertOptions);
+          alertOptions = angular.extend({}, $alertProvider.options, alertOptions);
           alertOptions.resolve = alertOptions.resolve || {};
 
-					//verify options
-          if (!alertOptions.text) {
-            throw new Error('Text option is required.');
+          //verify options
+          if (!alertOptions.body) {
+            throw new Error('Parameter "body" is required.');
           }
 
-          if (!alertOptions.actions) {
-            throw new Error('Actions option is required.');
+          if (!alertOptions.buttons) {
+            throw new Error('Parameter "buttons" is required.');
           }
 
           alertOptions.resolve.options = function () {
-          	return {
-	          	text: alertOptions.text
-	          };
+            return {
+              title: alertOptions.title,
+              body: alertOptions.body,
+              buttons: alertOptions.buttons
+            };
           };
 
           var modalInstance = $uibModal.open(alertOptions);
 
-		     	modalInstance.result.then(function (response) {
-		        if (alertOptions.actions.hasOwnProperty(response)) {
-		        	alertOptions.actions[response]();
-		        };
-		      });
+          modalInstance.result.then(function (button) {
+            button.action.call(button.action);
+          });
 
-					modalInstance.result.then(function () {
+          modalInstance.result.then(function () {
             alertResultDeferred.resolve(true);
           }, function () {
             alertResultDeferred.reject(false);
           });
 
-		      modalInstance.opened.then(function () {
+          modalInstance.opened.then(function () {
             alertOpenedDeferred.resolve(true);
           }, function () {
             alertOpenedDeferred.reject(false);
           });
+
+          // modalInstance.rendered.then(function () {
+          //   alertRenderedDeferred.resolve(true);
+          // }, function () {
+          //   alertRenderedDeferred.reject(false);
+          // });
 
           return alertInstance;
         };
@@ -97,18 +92,19 @@
       }]
     };
 
-    return $confirmAlertProvider;
+    return $alertProvider;
   });
 
   app.run(function($templateCache) {
     $templateCache.put('alertProvider.html',
-      '<div class="modal-header">'+
-        '<h3 class="modal-title">I\'m a modal!</h3>'+
-      '</div>'+
-      '<div class="modal-body">{{confirmAlertVM.text}}</div>' +
-      '<div class="modal-footer">'+
-        '<button type="submit" class="btn btn-primary" ng-click="confirmAlertVM.yes()">Yes</button>' +
-        '<button class="btn btn-default" ng-click="confirmAlertVM.no()">No</button>' +
+      '<div class="alertProvider">' +
+        '<div class="modal-header">' +
+          '<h3 class="modal-title">{{options.title}}</h3>' +
+        '</div>' +
+        '<div class="modal-body">{{options.body}}</div>' +
+        '<div class="modal-footer">' +
+          '<button ng-repeat="button in options.buttons" class="{{button.cssClass}}" ng-click="buttonClicked(button)">{{button.label}}</button>' +
+        '</div>' +
       '</div>'
     );
   });
