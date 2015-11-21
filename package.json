@@ -1,13 +1,14 @@
 {
   "name": "angular-alert-provider",
   "version": "0.1.0",
-  "description": "Bootstrap alert window encapsulated in angular provider.",
-  "main": "Gruntfile.js",
+  "description": "Angular provider used to display modal window. Allows to create simply modal window with buttons e.g. 'yes/no'. Based on angular bootstrap.",
+  "main": "dist/alertProvider.js",
   "directories": {
     "example": "examples"
   },
+  "keywords": ["bootstrap modal", "angular modal window", "modal popup", "modal window", "angular popup", "angular popup provider", "angular modal provider", "modal provider"],
   "scripts": {
-    "test": "grunt unit"
+    "run": "grunt serve"
   },
   "repository": {
     "type": "git",
