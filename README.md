@@ -23,6 +23,40 @@ Include provider into angular module dependency:
 ```javascript
 angular.module('App', ['$alertProvider']);
 ```
+### Ustage
+
+```javascript
+  $scope.openModal = function () {
+    var actionYes = function () {
+      console.log('clicked yes');
+    };
+
+    var actionNo = function () {
+      console.log('clicked no');
+    };
+
+    var alert = $alertProvider.open({
+      title: 'Modal title',
+      body: 'Do you confirm deleting element?',
+      buttons: [
+        {
+          label: 'Yes',
+          cssClass: 'btn btn-primary',
+          action: actionYes
+        },
+        {
+          label: 'No',
+          cssClass: 'btn btn-danger',
+          action: actionNo
+        }
+      ]
+    });
+  };
+```
+
+Result:
+
+![alt tag](https://raw.github.com/tomaszczechowski/angular-alert-provider/master/alertProvider.png)
 
 ### Example
 
@@ -37,9 +71,6 @@ Run grunt command in order to serve example page on http://localhost:3001 host.
 ```shell
 grunt serve
 ```
-
-You will see:
-
 
 ### Options
 
@@ -66,9 +97,9 @@ buttons: [
   }
 ]
 ```
-++ **label:** - button label.
-++ **cssClass:** - css class of button.
-++ **action:** - callback triggered once clicked on button.
+**label:** - button label.
+**cssClass:** - css class of button.
+**action:** - callback triggered once clicked on button.
 
 ### Release notes
 - 0.1.0 First version.
