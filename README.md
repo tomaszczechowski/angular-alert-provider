@@ -1,9 +1,9 @@
 # angular-alert-provider
-> Bootstrap alert window encapsulated in angular provider.
+> Angular Bootstrap modal window encapsulated in angular provider.
 
 ### Compatibility
-- Angular: 1.2.28+
-- Bootstrap: 3.3.5+
+- Angular: >1.2.28
+- Angular-bootstrap: ~0.14.3
 
 ### Installation
 Download plugin
@@ -74,6 +74,8 @@ grunt serve
 
 ### Options
 
++ **Provider allows to use angular bootstrap options ([documentation](https://angular-ui.github.io/bootstrap/#/modal))**
+
 + **title (required):**
 Title of modal dialog.
 
@@ -97,9 +99,9 @@ buttons: [
   }
 ]
 ```
-**label:** - button label.
-**cssClass:** - css class of button.
-**action:** - callback triggered once clicked on button.
+# label: - button label.
+# cssClass: - css class of button.
+# action: - callback triggered once clicked on button.
 
 ### Release notes
 - 0.1.0 First version.
