@@ -99,9 +99,9 @@ buttons: [
   }
 ]
 ```
-# label: - button label.
-# cssClass: - css class of button.
-# action: - callback triggered once clicked on button.
+*label: - button label.
+*cssClass: - css class of button.
+*action: - callback triggered once clicked on button.
 
 ### Release notes
 - 0.1.0 First version.
