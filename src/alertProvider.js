@@ -79,11 +79,11 @@
             alertOpenedDeferred.reject(false);
           });
 
-          // modalInstance.rendered.then(function () {
-          //   alertRenderedDeferred.resolve(true);
-          // }, function () {
-          //   alertRenderedDeferred.reject(false);
-          // });
+          modalInstance.rendered.then(function () {
+            alertRenderedDeferred.resolve(true);
+          }, function () {
+            alertRenderedDeferred.reject(false);
+          });
 
           return alertInstance;
         };
