@@ -56,7 +56,7 @@ angular.module('App', ['$alertProvider']);
 
 Result:
 
-![alt tag](https://raw.github.com/tomaszczechowski/angular-alert-provider/master/alertProvider.png)
+![alt tag](https://raw.github.com/tomaszczechowski/angular-alert-provider/master/alertProviderg.png)
 
 ### Example
 
@@ -105,5 +105,4 @@ buttons: [
 - 0.1.0 First version.
 
 ##### Licence MIT
-##### Author: Tomasz Czechowski
-- Twitter: https://twitter.com/t_czechowski
+##### Author: ![Alt text](https://twitter.com/t_czechowski "Tomasz Czechowski")
