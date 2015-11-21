@@ -105,4 +105,4 @@ buttons: [
 - 0.1.0 First version.
 
 ##### Licence MIT
-##### Author: ![Alt text](https://twitter.com/t_czechowski "Tomasz Czechowski")
+##### Author: [Tomasz Czechowski](http://czechowski.pl)
