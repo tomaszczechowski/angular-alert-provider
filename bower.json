@@ -1,0 +1,22 @@
+{
+  "name": "angular-alert-provider",
+  "homepage": "https://github.com/tomaszczechowski/angular-alert-provider",
+  "authors": [
+    "Tomasz Czechowski <tomasz@czechowski.pl>"
+  ],
+  "description": "Modal provider based on angular-bootstrap",
+  "main": "",
+  "moduleType": [],
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "devDependencies": {
+    "angular-bootstrap": "~0.14.3",
+    "bootstrap": "3.3.5"
+  }
+}
